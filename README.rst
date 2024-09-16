@@ -23,6 +23,12 @@ speedtest-cli works with Python 2.4-3.7
         :target: https://pypi.python.org/pypi/speedtest-cli/
         :alt: Versions
 
+Easy run with Docker
+--------------------
+::
+
+    docker run ghcr.io/aviadhahami/speedtest-cli
+
 Installation
 ------------
 
