@@ -165,6 +165,7 @@ except ImportError:
         """UTF-8 encoded wrapper around stdout for py3, to override
         ASCII stdout
         """
+
         def __init__(self, f, **kwargs):
             buf = FileIO(f.fileno(), 'w')
             super(_Py3Utf8Output, self).__init__(
@@ -418,6 +419,7 @@ class SpeedtestHTTPConnection(HTTPConnection):
     """Custom HTTPConnection to support source_address across
     Python 2.4 - Python 3
     """
+
     def __init__(self, *args, **kwargs):
         source_address = kwargs.pop('source_address', None)
         timeout = kwargs.pop('timeout', 10)
@@ -537,6 +539,7 @@ class SpeedtestHTTPHandler(AbstractHTTPHandler):
     """Custom ``HTTPHandler`` that can build a ``HTTPConnection`` with the
     args we need for ``source_address`` and ``timeout``
     """
+
     def __init__(self, debuglevel=0, source_address=None, timeout=10):
         AbstractHTTPHandler.__init__(self, debuglevel)
         self.source_address = source_address
@@ -559,6 +562,7 @@ class SpeedtestHTTPSHandler(AbstractHTTPHandler):
     """Custom ``HTTPSHandler`` that can build a ``HTTPSConnection`` with the
     args we need for ``source_address`` and ``timeout``
     """
+
     def __init__(self, debuglevel=0, context=None, source_address=None,
                  timeout=10):
         AbstractHTTPHandler.__init__(self, debuglevel)
@@ -623,6 +627,7 @@ class GzipDecodedResponse(GZIP_BASE):
     Largely copied from ``xmlrpclib``/``xmlrpc.client`` and modified
     to work for py2.4-py3
     """
+
     def __init__(self, response):
         # response doesn't support tell() and read(), required by
         # GzipFile
@@ -957,7 +962,7 @@ class SpeedtestResults(object):
         self.client = client or {}
 
         self._share = None
-        self.timestamp = '%sZ' % datetime.datetime.utcnow().isoformat()
+        self.timestamp = '%sZ' % datetime.datetime.now(datetime.timezone.utc).isoformat()
         self.bytes_received = 0
         self.bytes_sent = 0
 
